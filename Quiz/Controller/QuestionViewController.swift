@@ -60,7 +60,9 @@ class QuestionViewController: UIViewController {
 //  MARK: - Extensions
 
 extension QuestionViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
 }
 
 extension QuestionViewController: UICollectionViewDataSource {
