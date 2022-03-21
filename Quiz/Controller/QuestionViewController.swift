@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class QuestionViewController: UIViewController {
     
@@ -15,6 +16,8 @@ class QuestionViewController: UIViewController {
     
     let questionForm = QuestionForm()
     var collectionView: UICollectionView?
+    var questionArray = [JsonQuestion]()
+    var numberOfQuestion = 0
     
 //    MARK: - Lifecycle
     
@@ -23,12 +26,18 @@ class QuestionViewController: UIViewController {
         
         configureUI()
         configureCollectionView()
+                
+        NetworkService.shared.loadQuestion { result in
+            self.questionForm.questionTextView.text = result[self.numberOfQuestion].question
+            self.questionArray = result
+            self.collectionView?.reloadData()
+        }
         
         view.backgroundColor = .backgroundColor
     }
     
 //    MARK: - Helpers
-    
+        
     func configureUI() {
         view.addSubview(questionForm)
         
@@ -67,12 +76,17 @@ extension QuestionViewController: UICollectionViewDelegate {
 
 extension QuestionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        if !questionArray.isEmpty {
+            return questionArray[numberOfQuestion].answerArray.count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifire, for: indexPath) as? AnswerCell else { return UICollectionViewCell()}
-        
+        if !questionArray.isEmpty {
+            cell.textLable.text = questionArray[numberOfQuestion].answerArray[indexPath.row]
+        }
         return cell
     }
 }
