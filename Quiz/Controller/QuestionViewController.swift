@@ -43,9 +43,9 @@ class QuestionViewController: UIViewController {
         
         questionForm.translatesAutoresizingMaskIntoConstraints = false
         questionForm.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
-        questionForm.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 45).isActive = true
+        questionForm.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
         questionForm.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
-        questionForm.heightAnchor.constraint(equalToConstant: 210).isActive = true
+        questionForm.heightAnchor.constraint(equalToConstant: 170).isActive = true
     }
     
     func configureCollectionView() {
@@ -60,9 +60,16 @@ class QuestionViewController: UIViewController {
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
-        collectionView.topAnchor.constraint(equalTo: questionForm.bottomAnchor, constant: 70).isActive = true
+        collectionView.topAnchor.constraint(equalTo: questionForm.bottomAnchor, constant: 40).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+    }
+    
+    func animationButton(cell: UICollectionViewCell, color: UIColor) {
+        cell.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        cell.backgroundColor = color
+        cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+        cell.backgroundColor = .answerCellBackground
     }
 }
 
@@ -70,7 +77,20 @@ class QuestionViewController: UIViewController {
 
 extension QuestionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? AnswerCell else { return }
+        if questionArray[numberOfQuestion].rightAnswer == indexPath.row {
+            UIView.animate(withDuration: 0.9) {
+                self.animationButton(cell: cell, color: .systemGreen)
+            } completion: { _ in
+                self.numberOfQuestion += 1
+                self.questionForm.questionTextView.text = self.questionArray[self.numberOfQuestion].question
+                collectionView.reloadData()
+            }
+        } else {
+            UIView.animate(withDuration: 0.9) {
+                self.animationButton(cell: cell, color: .red)
+            }
+        }
     }
 }
 

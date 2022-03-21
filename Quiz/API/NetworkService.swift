@@ -14,10 +14,12 @@ struct NetworkService {
     let urlSite = "https://quizapi.io/api/v1/questions?"
     let api = "apiKey=6nBiIpBnHuQRJAUyBWEzPNXwfXicTDeTJXQngkai"
     let limited = "&limit=10"
+    let category = "&category=Linux"
+    let difficulty = "&difficulty=easy"
     let url: String
     
     init() {
-        url = self.urlSite + self.api + self.limited
+        url = self.urlSite + self.api + self.limited + self.category
     }
     
     

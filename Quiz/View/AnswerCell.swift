@@ -14,6 +14,8 @@ class AnswerCell: UICollectionViewCell {
         label.text = "Text"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .fontColor
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
