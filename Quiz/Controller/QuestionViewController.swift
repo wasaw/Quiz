@@ -19,7 +19,20 @@ class QuestionViewController: UIViewController {
     var questionArray = [JsonQuestion]()
     var numberOfQuestion = 0
     
+    let category: String
+    let limit: Int
+    
 //    MARK: - Lifecycle
+    
+    init(category: String, limit: Int) {
+        self.category = category
+        self.limit = limit
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +40,7 @@ class QuestionViewController: UIViewController {
         configureUI()
         configureCollectionView()
                 
-        NetworkService.shared.loadQuestion { result in
+        NetworkService.shared.loadQuestion(category: category, limit: String(limit)) { result in
             self.questionForm.questionTextView.text = result[self.numberOfQuestion].question
             self.questionArray = result
             self.collectionView?.reloadData()
