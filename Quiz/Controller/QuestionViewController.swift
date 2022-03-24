@@ -56,9 +56,9 @@ class QuestionViewController: UIViewController {
         
         questionForm.translatesAutoresizingMaskIntoConstraints = false
         questionForm.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
-        questionForm.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
+        questionForm.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         questionForm.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
-        questionForm.heightAnchor.constraint(equalToConstant: 170).isActive = true
+        questionForm.heightAnchor.constraint(equalToConstant: 190).isActive = true
     }
     
     func configureCollectionView() {
@@ -84,6 +84,13 @@ class QuestionViewController: UIViewController {
         cell.transform = CGAffineTransform(scaleX: 1, y: 1)
         cell.backgroundColor = .answerCellBackground
     }
+    
+    func completedTest() {
+        let vc = FinishTestController()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
 }
 
 //  MARK: - Extensions
@@ -96,8 +103,12 @@ extension QuestionViewController: UICollectionViewDelegate {
                 self.animationButton(cell: cell, color: .systemGreen)
             } completion: { _ in
                 self.numberOfQuestion += 1
-                self.questionForm.questionTextView.text = self.questionArray[self.numberOfQuestion].question
-                collectionView.reloadData()
+                if self.numberOfQuestion < self.questionArray.count && self.numberOfQuestion < self.limit  {
+                    self.questionForm.questionTextView.text = self.questionArray[self.numberOfQuestion].question
+                    collectionView.reloadData()
+                } else {
+                    self.completedTest()
+                }
             }
         } else {
             UIView.animate(withDuration: 0.9) {
@@ -109,7 +120,7 @@ extension QuestionViewController: UICollectionViewDelegate {
 
 extension QuestionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if !questionArray.isEmpty {
+        if !questionArray.isEmpty && numberOfQuestion < questionArray.count {
             return questionArray[numberOfQuestion].answerArray.count
         }
         return 0
@@ -117,7 +128,7 @@ extension QuestionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifire, for: indexPath) as? AnswerCell else { return UICollectionViewCell()}
-        if !questionArray.isEmpty {
+        if !questionArray.isEmpty && numberOfQuestion < questionArray.count {
             cell.textLable.text = questionArray[numberOfQuestion].answerArray[indexPath.row]
         }
         return cell

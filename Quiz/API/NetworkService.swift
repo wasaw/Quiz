@@ -16,8 +16,8 @@ struct NetworkService {
     
     func loadQuestion(category: String, limit: String, completion: @escaping(([JsonQuestion]) -> Void)) {
         let category = "&category=" + category
-        let limit = "&liimit=" + limit
-        let urlRequest = urlSite + api + limit + category
+        let limit = "&limit=" + limit
+        let urlRequest = urlSite + api + category + limit
         
         AF.request(urlRequest).responseDecodable(of: [JsonQuestion].self) { response in
             guard let result = response.value else { return }
