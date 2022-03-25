@@ -28,6 +28,7 @@
 		BB6A11B527E9FD92006A7174 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11B427E9FD92006A7174 /* StartButton.swift */; };
 		BB6A11B927EB15B6006A7174 /* LimitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11B827EB15B6006A7174 /* LimitButton.swift */; };
 		BB6A11BB27EC7249006A7174 /* FinishTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11BA27EC7249006A7174 /* FinishTestController.swift */; };
+		BB7530FD27EDBEFE00E520E5 /* ProgressViewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7530FC27EDBEFD00E520E5 /* ProgressViewDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		BB6A11B427E9FD92006A7174 /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		BB6A11B827EB15B6006A7174 /* LimitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitButton.swift; sourceTree = "<group>"; };
 		BB6A11BA27EC7249006A7174 /* FinishTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishTestController.swift; sourceTree = "<group>"; };
+		BB7530FC27EDBEFD00E520E5 /* ProgressViewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewDescription.swift; sourceTree = "<group>"; };
 		BE846028F171479057164105 /* Pods_Quiz_QuizUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_QuizUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15AFCB8D62418F4C6100C2F /* Pods_Quiz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -184,6 +186,7 @@
 				BB6A11B227E9B033006A7174 /* CategoryChoice.swift */,
 				BB6A11B427E9FD92006A7174 /* StartButton.swift */,
 				BB6A11B827EB15B6006A7174 /* LimitButton.swift */,
+				BB7530FC27EDBEFD00E520E5 /* ProgressViewDescription.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				BB6A11A227E4A431006A7174 /* Question.swift in Sources */,
 				BB6A118C27E0B61F006A7174 /* AnswerCell.swift in Sources */,
 				BB6A11BB27EC7249006A7174 /* FinishTestController.swift in Sources */,
+				BB7530FD27EDBEFE00E520E5 /* ProgressViewDescription.swift in Sources */,
 				BB6A11B127E8C446006A7174 /* StartViewController.swift in Sources */,
 				BB6A118327DF8AD5006A7174 /* QuestionViewController.swift in Sources */,
 				BB6A116B27DF88EA006A7174 /* SceneDelegate.swift in Sources */,

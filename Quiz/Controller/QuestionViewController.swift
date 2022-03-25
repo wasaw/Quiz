@@ -16,17 +16,19 @@ class QuestionViewController: UIViewController {
     
     let questionForm = QuestionForm()
     var collectionView: UICollectionView?
-    var questionArray = [JsonQuestion]()
+    let progressDescription = ProgressViewDescription()
+    let progressView = UIProgressView()
+    var questionsArray = [JsonQuestion]()
     var numberOfQuestion = 0
     
     let category: String
-    let limit: Int
+    var limitQuestins: Int
     
 //    MARK: - Lifecycle
     
     init(category: String, limit: Int) {
         self.category = category
-        self.limit = limit
+        self.limitQuestins = limit
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,11 +40,12 @@ class QuestionViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
-        configureCollectionView()
                 
-        NetworkService.shared.loadQuestion(category: category, limit: String(limit)) { result in
+        NetworkService.shared.loadQuestion(category: category, limit: String(limitQuestins)) { result in
             self.questionForm.questionTextView.text = result[self.numberOfQuestion].question
-            self.questionArray = result
+            self.questionsArray = result
+            if self.questionsArray.count < self.limitQuestins { self.limitQuestins = self.questionsArray.count}
+            self.installationProgress()
             self.collectionView?.reloadData()
         }
         
@@ -52,11 +55,40 @@ class QuestionViewController: UIViewController {
 //    MARK: - Helpers
         
     func configureUI() {
+        configureProgressDescription()
+        configureProgressView()
+        configureQuestionForm()
+        configureCollectionView()
+    }
+    
+    func configureProgressDescription() {
+        view.addSubview(progressDescription)
+        
+        progressDescription.translatesAutoresizingMaskIntoConstraints = false
+        progressDescription.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
+        progressDescription.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        progressDescription.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
+        progressDescription.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    }
+    
+    func configureProgressView() {
+        view.addSubview(progressView)
+        
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
+        progressView.topAnchor.constraint(equalTo: progressDescription.bottomAnchor, constant: 2).isActive = true
+        progressView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
+        progressView.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        progressView.trackTintColor = .gray
+        progressView.tintColor = .white
+    }
+    
+    func configureQuestionForm() {
         view.addSubview(questionForm)
         
         questionForm.translatesAutoresizingMaskIntoConstraints = false
         questionForm.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
-        questionForm.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        questionForm.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 10).isActive = true
         questionForm.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
         questionForm.heightAnchor.constraint(equalToConstant: 190).isActive = true
     }
@@ -73,7 +105,7 @@ class QuestionViewController: UIViewController {
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
-        collectionView.topAnchor.constraint(equalTo: questionForm.bottomAnchor, constant: 40).isActive = true
+        collectionView.topAnchor.constraint(equalTo: questionForm.bottomAnchor, constant: 25).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
@@ -83,6 +115,13 @@ class QuestionViewController: UIViewController {
         cell.backgroundColor = color
         cell.transform = CGAffineTransform(scaleX: 1, y: 1)
         cell.backgroundColor = .answerCellBackground
+    }
+    
+    func installationProgress() {
+        let progress = Float(numberOfQuestion) / Float(limitQuestins)
+        progressDescription.persentLabel.text = String(progress * 100) + "%"
+        progressDescription.questionLabel.text = String(numberOfQuestion + 1) + "/" + String(limitQuestins)
+        progressView.setProgress(progress, animated: true)
     }
     
     func completedTest() {
@@ -98,13 +137,14 @@ class QuestionViewController: UIViewController {
 extension QuestionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? AnswerCell else { return }
-        if questionArray[numberOfQuestion].rightAnswer == indexPath.row {
+        if questionsArray[numberOfQuestion].rightAnswer == indexPath.row {
             UIView.animate(withDuration: 0.9) {
                 self.animationButton(cell: cell, color: .systemGreen)
             } completion: { _ in
                 self.numberOfQuestion += 1
-                if self.numberOfQuestion < self.questionArray.count && self.numberOfQuestion < self.limit  {
-                    self.questionForm.questionTextView.text = self.questionArray[self.numberOfQuestion].question
+                if self.numberOfQuestion < self.limitQuestins  {
+                    self.questionForm.questionTextView.text = self.questionsArray[self.numberOfQuestion].question
+                    self.installationProgress()
                     collectionView.reloadData()
                 } else {
                     self.completedTest()
@@ -120,16 +160,16 @@ extension QuestionViewController: UICollectionViewDelegate {
 
 extension QuestionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if !questionArray.isEmpty && numberOfQuestion < questionArray.count {
-            return questionArray[numberOfQuestion].answerArray.count
+        if !questionsArray.isEmpty && numberOfQuestion < questionsArray.count {
+            return questionsArray[numberOfQuestion].answerArray.count
         }
         return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifire, for: indexPath) as? AnswerCell else { return UICollectionViewCell()}
-        if !questionArray.isEmpty && numberOfQuestion < questionArray.count {
-            cell.textLable.text = questionArray[numberOfQuestion].answerArray[indexPath.row]
+        if !questionsArray.isEmpty && numberOfQuestion < questionsArray.count {
+            cell.textLable.text = questionsArray[numberOfQuestion].answerArray[indexPath.row]
         }
         return cell
     }

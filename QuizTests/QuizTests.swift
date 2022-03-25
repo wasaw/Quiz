@@ -15,17 +15,46 @@ class QuizTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         try super.setUpWithError()
-        sut = QuestionViewController()
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        sut = nil
         try super.tearDownWithError()
     }
     
-    func test() {
+    func testProgress() {
+//        1. given
+        let controller = QuestionViewController(category: "Linux", limit: 10)
+
+//        2. when
+        controller.limitQuestins = 10
+        controller.numberOfQuestion = 2
+
+//        3. then
+        controller.installationProgress()
+        XCTAssertEqual(controller.progressDescription.persentLabel.text, "20.0%")
+    }
+    
+    func testApi() {
+        let url = URL(string: "https://quizapi.io/api/v1/questions?apiKey=6nBiIpBnHuQRJAUyBWEzPNXwfXicTDeTJXQngkai&category=Linux&limit=5")
+        let promise = expectation(description: "Status code: 200")
+        let sessionUnderTest = URLSession(configuration: URLSessionConfiguration.default)
         
+        let dataTask = sessionUnderTest.dataTask(with: url!) { data, response, error in
+            guard error == nil else {
+                XCTFail("Error: \(error!.localizedDescription)")
+                return
+            }
+            if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+                if statusCode == 200 {
+                    promise.fulfill()
+                } else {
+                    XCTFail("Status code: \(statusCode)")
+                }
+            }
+        }
+        dataTask.resume()
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
     func testExample() throws {
