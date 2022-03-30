@@ -45,7 +45,7 @@ class ProgressViewDescription: UIView {
         questionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         questionLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
-        backgroundColor = .blue
+        backgroundColor = .backgroundColor
     }
     
     required init?(coder: NSCoder) {

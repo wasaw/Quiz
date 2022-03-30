@@ -11,7 +11,7 @@ class CategoryChoice: UIPickerView {
     
 //    MARK: - Properties
     
-    let categoryArray = ["Linux", "DevOps", "Bash", "Docker"]
+    private let categoryArray = ["Linux", "DevOps", "Bash", "Docker"]
     var category: String
 
     

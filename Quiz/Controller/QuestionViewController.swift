@@ -14,20 +14,23 @@ class QuestionViewController: UIViewController {
     
     private let reuseIdentifire = "AnswerCell"
     
-    let questionForm = QuestionForm()
-    var collectionView: UICollectionView?
-    let progressDescription = ProgressViewDescription()
-    let progressView = UIProgressView()
-    var questionsArray = [JsonQuestion]()
-    var numberOfQuestion = 0
+    private let questionForm = QuestionForm()
+    private var collectionView: UICollectionView?
+    private let progressDescription = ProgressViewDescription()
+    private let progressView = UIProgressView()
+    private var questionsArray = [JsonQuestion]()
+    private var numberOfQuestion = 0
     
-    let category: String
-    var limitQuestins: Int
+    private let category: String
+    private var limitQuestins: Int
+    
+    private var result = Result()
     
 //    MARK: - Lifecycle
     
     init(category: String, limit: Int) {
         self.category = category
+        self.result.topic = category
         self.limitQuestins = limit
         super.init(nibName: nil, bundle: nil)
     }
@@ -119,13 +122,15 @@ class QuestionViewController: UIViewController {
     
     func installationProgress() {
         let progress = Float(numberOfQuestion) / Float(limitQuestins)
-        progressDescription.persentLabel.text = String(progress * 100) + "%"
+        progressDescription.persentLabel.text = String(format: "%.1f", (progress * 100)) + "%"
         progressDescription.questionLabel.text = String(numberOfQuestion + 1) + "/" + String(limitQuestins)
         progressView.setProgress(progress, animated: true)
+        result.answer += 1
     }
     
     func completedTest() {
-        let vc = FinishTestController()
+        result.percentRightAnswer = (Float(limitQuestins) / Float(result.answer)) * 100
+        let vc = FinishTestController(result)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -152,6 +157,7 @@ extension QuestionViewController: UICollectionViewDelegate {
             }
         } else {
             UIView.animate(withDuration: 0.9) {
+                self.result.answer += 1
                 self.animationButton(cell: cell, color: .red)
             }
         }

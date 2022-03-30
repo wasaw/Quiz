@@ -11,8 +11,12 @@ import Alamofire
 struct NetworkService {
     static let shared = NetworkService()
     
+//    MARK: - Properties
+    
     let urlSite = "https://quizapi.io/api/v1/questions?"
     let api = "apiKey=6nBiIpBnHuQRJAUyBWEzPNXwfXicTDeTJXQngkai"
+    
+//    MARK: - Helpers
     
     func loadQuestion(category: String, limit: String, completion: @escaping(([JsonQuestion]) -> Void)) {
         let category = "&category=" + category

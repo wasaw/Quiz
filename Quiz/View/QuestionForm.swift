@@ -13,7 +13,6 @@ class QuestionForm: UIView {
     
     var questionTextView: UITextView = {
         let textView = UITextView()
-//        textView.text = "Some text"
         textView.font = UIFont.boldSystemFont(ofSize: 24)
         textView.textColor = .fontColor
         textView.backgroundColor = .questionFormBackground

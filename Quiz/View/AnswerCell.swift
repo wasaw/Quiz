@@ -11,7 +11,6 @@ class AnswerCell: UICollectionViewCell {
     
     let textLable: UILabel = {
         let label = UILabel()
-        label.text = "Text"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .fontColor
         label.numberOfLines = 0

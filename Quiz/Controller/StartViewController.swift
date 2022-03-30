@@ -10,15 +10,15 @@ import UIKit
 class StartViewController: UIViewController {
     
 //    MARK: - Properties
-    let questionForm = QuestionForm()
-    let categoryChoicePicker = CategoryChoice()
-    var stack = UIStackView()
-    let limitButtonFive = LimitButton()
-    let limitButtonTen = LimitButton()
-    let limitButtonTwentyFive = LimitButton()
-    var limitButtonArray = [LimitButton]()
-    var limit = 5
-    let submitButton = StartButton()
+    private let questionForm = QuestionForm()
+    private let categoryChoicePicker = CategoryChoice()
+    private var stack = UIStackView()
+    private let limitButtonFive = LimitButton()
+    private let limitButtonTen = LimitButton()
+    private let limitButtonTwentyFive = LimitButton()
+    private var limitButtonArray = [LimitButton]()
+    private var limit = 1
+    private let submitButton = Button(title: "Начать", background: .white, font: .gray)
     
 //    MARK: - Lifecycle
     

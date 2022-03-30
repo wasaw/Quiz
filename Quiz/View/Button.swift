@@ -7,18 +7,18 @@
 
 import UIKit
 
-class StartButton: UIButton {
+class Button: UIButton {
     
 //    MARK: - Lifecycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setTitle("Начать", for: .normal)
+    required init(title: String, background bgColor: UIColor, font textColor: UIColor) {
+        super.init(frame: .zero)
+
+        setTitle(title, for: .normal)
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
-        setTitleColor(.gray, for: .normal)
-        
-        backgroundColor = .white
+        setTitleColor(textColor, for: .normal)
+
+        backgroundColor = bgColor
     }
     
     required init?(coder: NSCoder) {

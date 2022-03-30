@@ -25,10 +25,14 @@
 		BB6A11AA27E89A37006A7174 /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11A927E89A37006A7174 /* QuizTests.swift */; };
 		BB6A11B127E8C446006A7174 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11B027E8C446006A7174 /* StartViewController.swift */; };
 		BB6A11B327E9B033006A7174 /* CategoryChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11B227E9B033006A7174 /* CategoryChoice.swift */; };
-		BB6A11B527E9FD92006A7174 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11B427E9FD92006A7174 /* StartButton.swift */; };
+		BB6A11B527E9FD92006A7174 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11B427E9FD92006A7174 /* Button.swift */; };
 		BB6A11B927EB15B6006A7174 /* LimitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11B827EB15B6006A7174 /* LimitButton.swift */; };
 		BB6A11BB27EC7249006A7174 /* FinishTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6A11BA27EC7249006A7174 /* FinishTestController.swift */; };
 		BB7530FD27EDBEFE00E520E5 /* ProgressViewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7530FC27EDBEFD00E520E5 /* ProgressViewDescription.swift */; };
+		BB7530FF27F2F78700E520E5 /* RecordPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7530FE27F2F78700E520E5 /* RecordPopView.swift */; };
+		BB75310127F2FC5200E520E5 /* RecordPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75310027F2FC5100E520E5 /* RecordPopUpController.swift */; };
+		BB75310327F32A7000E520E5 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75310227F32A7000E520E5 /* DatabaseService.swift */; };
+		BB75310527F45E3B00E520E5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75310427F45E3B00E520E5 /* Result.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,10 +77,14 @@
 		BB6A11A927E89A37006A7174 /* QuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		BB6A11B027E8C446006A7174 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		BB6A11B227E9B033006A7174 /* CategoryChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChoice.swift; sourceTree = "<group>"; };
-		BB6A11B427E9FD92006A7174 /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
+		BB6A11B427E9FD92006A7174 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		BB6A11B827EB15B6006A7174 /* LimitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitButton.swift; sourceTree = "<group>"; };
 		BB6A11BA27EC7249006A7174 /* FinishTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishTestController.swift; sourceTree = "<group>"; };
 		BB7530FC27EDBEFD00E520E5 /* ProgressViewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewDescription.swift; sourceTree = "<group>"; };
+		BB7530FE27F2F78700E520E5 /* RecordPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPopView.swift; sourceTree = "<group>"; };
+		BB75310027F2FC5100E520E5 /* RecordPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPopUpController.swift; sourceTree = "<group>"; };
+		BB75310227F32A7000E520E5 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		BB75310427F45E3B00E520E5 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		BE846028F171479057164105 /* Pods_Quiz_QuizUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_QuizUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15AFCB8D62418F4C6100C2F /* Pods_Quiz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -174,6 +182,7 @@
 				BB6A11B027E8C446006A7174 /* StartViewController.swift */,
 				BB6A118227DF8AD5006A7174 /* QuestionViewController.swift */,
 				BB6A11BA27EC7249006A7174 /* FinishTestController.swift */,
+				BB75310027F2FC5100E520E5 /* RecordPopUpController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -184,9 +193,10 @@
 				BB6A118027DF8971006A7174 /* QuestionForm.swift */,
 				BB6A118B27E0B61F006A7174 /* AnswerCell.swift */,
 				BB6A11B227E9B033006A7174 /* CategoryChoice.swift */,
-				BB6A11B427E9FD92006A7174 /* StartButton.swift */,
+				BB6A11B427E9FD92006A7174 /* Button.swift */,
 				BB6A11B827EB15B6006A7174 /* LimitButton.swift */,
 				BB7530FC27EDBEFD00E520E5 /* ProgressViewDescription.swift */,
+				BB7530FE27F2F78700E520E5 /* RecordPopView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				BB6A11A127E4A431006A7174 /* Question.swift */,
+				BB75310427F45E3B00E520E5 /* Result.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				BB6A119D27E358BA006A7174 /* NetworkService.swift */,
+				BB75310227F32A7000E520E5 /* DatabaseService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -448,11 +460,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB75310527F45E3B00E520E5 /* Result.swift in Sources */,
+				BB75310327F32A7000E520E5 /* DatabaseService.swift in Sources */,
 				BB6A118627E07970006A7174 /* Extensions.swift in Sources */,
 				BB6A118127DF8971006A7174 /* QuestionForm.swift in Sources */,
 				BB6A11B927EB15B6006A7174 /* LimitButton.swift in Sources */,
 				BB6A116927DF88EA006A7174 /* AppDelegate.swift in Sources */,
-				BB6A11B527E9FD92006A7174 /* StartButton.swift in Sources */,
+				BB6A11B527E9FD92006A7174 /* Button.swift in Sources */,
+				BB7530FF27F2F78700E520E5 /* RecordPopView.swift in Sources */,
 				BB6A11A227E4A431006A7174 /* Question.swift in Sources */,
 				BB6A118C27E0B61F006A7174 /* AnswerCell.swift in Sources */,
 				BB6A11BB27EC7249006A7174 /* FinishTestController.swift in Sources */,
@@ -460,6 +475,7 @@
 				BB6A11B127E8C446006A7174 /* StartViewController.swift in Sources */,
 				BB6A118327DF8AD5006A7174 /* QuestionViewController.swift in Sources */,
 				BB6A116B27DF88EA006A7174 /* SceneDelegate.swift in Sources */,
+				BB75310127F2FC5200E520E5 /* RecordPopUpController.swift in Sources */,
 				BB6A11B327E9B033006A7174 /* CategoryChoice.swift in Sources */,
 				BB6A119E27E358BA006A7174 /* NetworkService.swift in Sources */,
 			);
