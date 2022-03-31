@@ -32,7 +32,7 @@ class RecordPopView: UIView {
     
     let percentRightAnswerLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 19)
         label.textAlignment = .left
         return label
     }()

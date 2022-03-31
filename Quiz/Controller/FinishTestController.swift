@@ -24,6 +24,12 @@ class FinishTestController: UIViewController {
     
     private let result: Result
     
+    private let tableView = UITableView()
+    private let reuseIdentifire = "FinishCell"
+    
+    private let databaseService = DatabaseService.shared
+    private var answerResult = [Result]()
+    private let limitCellCount = 5
     
 //    MARK: - Lifecycle
     
@@ -42,6 +48,7 @@ class FinishTestController: UIViewController {
         configureLabel()
         configureNewGameButton()
         configureRecordButton()
+        configureTableView()
         
         view.backgroundColor = .backgroundColor
     }
@@ -82,6 +89,22 @@ class FinishTestController: UIViewController {
         recordButton.addTarget(self, action: #selector(handleRecordResult), for: .touchUpInside)
     }
     
+    func configureTableView() {
+        tableView.register(FinishCell.self, forCellReuseIdentifier: reuseIdentifire)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 60
+        
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
+        tableView.topAnchor.constraint(equalTo: recordButton.bottomAnchor, constant: 35).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        tableView.isHidden = true
+        tableView.backgroundColor = .backgroundColor
+    }
+    
 //    MARK: - Selectors
     
     @objc func handleNewGame() {
@@ -89,8 +112,45 @@ class FinishTestController: UIViewController {
     }
     
     @objc func handleRecordResult() {
-        let popVC = RecordPopUpController(result)
-        popVC.inputViewController?.modalPresentationStyle = .popover
-        self.present(popVC, animated: true, completion: nil)
+        if tableView.isHidden {
+            let popVC = RecordPopUpController(result)
+            popVC.delegate = self
+            popVC.inputViewController?.modalPresentationStyle = .popover
+            self.present(popVC, animated: true, completion: nil)
+        }
+    }
+}
+
+//  MARK: - Extensions
+
+extension FinishTestController: UITableViewDelegate {
+    
+}
+
+extension FinishTestController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifire, for: indexPath) as? FinishCell else { return UITableViewCell() }
+        if !answerResult.isEmpty {
+            cell.numberLabel.text = String(indexPath.row + 1)
+            cell.nicknameLabel.text = String(answerResult[indexPath.row].nickname)
+            cell.topicLabel.text = answerResult[indexPath.row].topic
+            cell.percentRightAnswer.text = String(format: "%.1f", answerResult[indexPath.row].percentRightAnswer)
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if 0 < answerResult.count && answerResult.count < 5 {
+            return answerResult.count
+        }
+        return 5
+    }
+}
+
+extension FinishTestController: UpdateResultTableDelegate {
+    func updateResultTable() {
+        answerResult = databaseService.loadResult()
+        tableView.reloadData()
+        tableView.isHidden = false
     }
 }

@@ -14,7 +14,7 @@ struct DatabaseService {
 //    MARK: - Properties
     
     let realm = try! Realm()
-
+    
 //    MARK: - Helpers
     
     func saveResult(_ result: Result) {
@@ -23,5 +23,11 @@ struct DatabaseService {
                 realm.add(result)
             })
         }
+    }
+    
+    func loadResult() -> [Result] {
+        let answer = realm.objects(Result.self)
+        let sortedAnswer = Array(answer.sorted(byKeyPath: "percentRightAnswer", ascending: false))
+        return sortedAnswer
     }
 }

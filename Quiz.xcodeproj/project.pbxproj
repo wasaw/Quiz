@@ -33,6 +33,7 @@
 		BB75310127F2FC5200E520E5 /* RecordPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75310027F2FC5100E520E5 /* RecordPopUpController.swift */; };
 		BB75310327F32A7000E520E5 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75310227F32A7000E520E5 /* DatabaseService.swift */; };
 		BB75310527F45E3B00E520E5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75310427F45E3B00E520E5 /* Result.swift */; };
+		BB75310727F4A64400E520E5 /* FinishCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB75310627F4A64400E520E5 /* FinishCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		BB75310027F2FC5100E520E5 /* RecordPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPopUpController.swift; sourceTree = "<group>"; };
 		BB75310227F32A7000E520E5 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		BB75310427F45E3B00E520E5 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		BB75310627F4A64400E520E5 /* FinishCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishCell.swift; sourceTree = "<group>"; };
 		BE846028F171479057164105 /* Pods_Quiz_QuizUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_QuizUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15AFCB8D62418F4C6100C2F /* Pods_Quiz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -197,6 +199,7 @@
 				BB6A11B827EB15B6006A7174 /* LimitButton.swift */,
 				BB7530FC27EDBEFD00E520E5 /* ProgressViewDescription.swift */,
 				BB7530FE27F2F78700E520E5 /* RecordPopView.swift */,
+				BB75310627F4A64400E520E5 /* FinishCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 			files = (
 				BB75310527F45E3B00E520E5 /* Result.swift in Sources */,
 				BB75310327F32A7000E520E5 /* DatabaseService.swift in Sources */,
+				BB75310727F4A64400E520E5 /* FinishCell.swift in Sources */,
 				BB6A118627E07970006A7174 /* Extensions.swift in Sources */,
 				BB6A118127DF8971006A7174 /* QuestionForm.swift in Sources */,
 				BB6A11B927EB15B6006A7174 /* LimitButton.swift in Sources */,

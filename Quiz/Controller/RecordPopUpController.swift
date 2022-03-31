@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol UpdateResultTableDelegate: class {
+    func updateResultTable()
+}
+
 class RecordPopUpController: UIViewController {
     
 //    MARK: - Properties
@@ -14,6 +18,8 @@ class RecordPopUpController: UIViewController {
     private let recordPopView = RecordPopView()
     private var result: Result
     private let database = DatabaseService.shared
+    
+    weak var delegate: UpdateResultTableDelegate?
     
 //    MARK: - Lifecycle
     
@@ -43,7 +49,7 @@ class RecordPopUpController: UIViewController {
         recordPopView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         recordPopView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
-        recordPopView.allAnswerLabel.text = "Количество правильных ответов: " + String(result.answer)
+        recordPopView.allAnswerLabel.text = "Количество ответов: " + String(result.answer)
         recordPopView.percentRightAnswerLabel.text = "Процент правильных ответов: " + String(format: "%.1f", result.percentRightAnswer) + "%"
         
         recordPopView.delegate = self
@@ -57,6 +63,8 @@ extension RecordPopUpController: SaveResultDelegate {
         guard recordPopView.nicknameTextField.text != "" else { return }
         result.nickname = recordPopView.nicknameTextField.text ?? ""
         database.saveResult(result)
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            self.delegate?.updateResultTable()
+        }
     }
 }
