@@ -35,11 +35,8 @@ class QuizUITests: XCTestCase {
         app.launch()
         
         let textView = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element
-        
-        let cell = app.collectionViews.children(matching: .cell).element.firstMatch
-        
+                
         XCTAssertTrue(textView.exists)
-        XCTAssertTrue(cell.exists)
     }
   
     func testLaunchPerformance() throws {

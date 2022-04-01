@@ -10,29 +10,29 @@ import XCTest
 
 class QuizTests: XCTestCase {
     
-    var sut: QuestionViewController!
+    var questionController: QuestionViewController!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         try super.setUpWithError()
+        
+        questionController = QuestionViewController(category: "Linux", limit: 10)
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
+        questionController = nil
         try super.tearDownWithError()
     }
     
     func testProgress() {
-//        1. given
-        let controller = QuestionViewController(category: "Linux", limit: 10)
 
-//        2. when
-        controller.limitQuestins = 10
-        controller.numberOfQuestion = 2
+        questionController.limitQuestins = 10
+        questionController.numberOfQuestion = 2
 
-//        3. then
-        controller.installationProgress()
-        XCTAssertEqual(controller.progressDescription.persentLabel.text, "20.0%")
+        questionController.installationProgress()
+        XCTAssertEqual(questionController.progressDescription.persentLabel.text, "20.0%")
     }
     
     func testApi() {

@@ -16,13 +16,13 @@ class QuestionViewController: UIViewController {
     
     private let questionForm = QuestionForm()
     private var collectionView: UICollectionView?
-    private let progressDescription = ProgressViewDescription()
+    let progressDescription = ProgressViewDescription()
     private let progressView = UIProgressView()
     private var questionsArray = [JsonQuestion]()
-    private var numberOfQuestion = 0
+    var numberOfQuestion = 0
     
     private let category: String
-    private var limitQuestins: Int
+    var limitQuestins: Int
     
     private var result = Result()
     
@@ -57,14 +57,14 @@ class QuestionViewController: UIViewController {
     
 //    MARK: - Helpers
         
-    func configureUI() {
+    private func configureUI() {
         configureProgressDescription()
         configureProgressView()
         configureQuestionForm()
         configureCollectionView()
     }
     
-    func configureProgressDescription() {
+    private func configureProgressDescription() {
         view.addSubview(progressDescription)
         
         progressDescription.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ class QuestionViewController: UIViewController {
         progressDescription.heightAnchor.constraint(equalToConstant: 15).isActive = true
     }
     
-    func configureProgressView() {
+    private func configureProgressView() {
         view.addSubview(progressView)
         
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +86,7 @@ class QuestionViewController: UIViewController {
         progressView.tintColor = .white
     }
     
-    func configureQuestionForm() {
+    private func configureQuestionForm() {
         view.addSubview(questionForm)
         
         questionForm.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +96,7 @@ class QuestionViewController: UIViewController {
         questionForm.heightAnchor.constraint(equalToConstant: 190).isActive = true
     }
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         guard let collectionView = collectionView else { return }
@@ -113,7 +113,7 @@ class QuestionViewController: UIViewController {
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
     
-    func animationButton(cell: UICollectionViewCell, color: UIColor) {
+    private func animationButton(cell: UICollectionViewCell, color: UIColor) {
         cell.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         cell.backgroundColor = color
         cell.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -128,7 +128,7 @@ class QuestionViewController: UIViewController {
         result.answer += 1
     }
     
-    func completedTest() {
+    private func completedTest() {
         result.percentRightAnswer = (Float(limitQuestins) / Float(result.answer)) * 100
         let vc = FinishTestController(result)
         let nav = UINavigationController(rootViewController: vc)

@@ -33,14 +33,14 @@ class StartViewController: UIViewController {
     
 //    MARK: - Helpers
     
-    func configureUI() {
+    private func configureUI() {
         configureQuestionForm()
         configureCategoryChoice()
         configureLimitButtons()
         configureStartButton()
     }
     
-    func configureQuestionForm() {
+    private func configureQuestionForm() {
         view.addSubview(questionForm)
         
         questionForm.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ class StartViewController: UIViewController {
         questionForm.questionTextView.text = "Выберите подходящую категорию"
     }
     
-    func configureCategoryChoice() {
+    private func configureCategoryChoice() {
         view.addSubview(categoryChoicePicker)
         
         categoryChoicePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +62,7 @@ class StartViewController: UIViewController {
         categoryChoicePicker.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
-    func configureLimitButtons() {
+    private func configureLimitButtons() {
         view.addSubview(limitButtonFive)
         limitButtonFive.setTitle("5", for: .normal)
         limitButtonFive.tag = 5
@@ -91,7 +91,7 @@ class StartViewController: UIViewController {
         stack.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    func configureStartButton() {
+    private func configureStartButton() {
         view.addSubview(submitButton)
         
         submitButton.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +103,7 @@ class StartViewController: UIViewController {
         submitButton.addTarget(self, action: #selector(handleSubmit), for: .touchUpInside)
     }
     
-    func takeOffSelectedButton() {
+    private func takeOffSelectedButton() {
         for item in limitButtonArray {
             item.isChecked = false
         }

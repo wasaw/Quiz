@@ -18,7 +18,8 @@ class RecordPopView: UIView {
     let nicknameTextField: UITextField = {
         let tf = UITextField()
         tf.font = UIFont.systemFont(ofSize: 20)
-        tf.placeholder = "Введите никнейм"
+        tf.attributedPlaceholder = NSAttributedString(string: "Введите никнейм", attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray])
+        tf.textColor = .black
         tf.layer.borderWidth = 2
         return tf
     }()
@@ -26,6 +27,7 @@ class RecordPopView: UIView {
     let allAnswerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = .gray
         label.textAlignment = .left
         return label
     }()
@@ -33,6 +35,7 @@ class RecordPopView: UIView {
     let percentRightAnswerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 19)
+        label.textColor = .gray
         label.textAlignment = .left
         return label
     }()

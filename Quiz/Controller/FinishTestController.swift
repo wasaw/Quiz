@@ -55,7 +55,7 @@ class FinishTestController: UIViewController {
     
 //    MARK: - Helpers
     
-    func configureLabel() {
+    private func configureLabel() {
         view.addSubview(congratulationLabel)
         
         congratulationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +65,7 @@ class FinishTestController: UIViewController {
         congratulationLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
-    func configureNewGameButton() {
+    private func configureNewGameButton() {
         view.addSubview(newGameButton)
         
         newGameButton.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +77,7 @@ class FinishTestController: UIViewController {
         newGameButton.addTarget(self, action: #selector(handleNewGame), for: .touchUpInside)
     }
     
-    func configureRecordButton() {
+    private func configureRecordButton() {
         view.addSubview(recordButton)
         
         recordButton.translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +89,7 @@ class FinishTestController: UIViewController {
         recordButton.addTarget(self, action: #selector(handleRecordResult), for: .touchUpInside)
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         tableView.register(FinishCell.self, forCellReuseIdentifier: reuseIdentifire)
         tableView.dataSource = self
         tableView.delegate = self

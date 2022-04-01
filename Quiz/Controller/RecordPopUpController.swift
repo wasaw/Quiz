@@ -40,7 +40,7 @@ class RecordPopUpController: UIViewController {
     
 //    MARK: - Helpers
     
-    func configureRecordPopView() {
+    private func configureRecordPopView() {
         view.addSubview(recordPopView)
         
         recordPopView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class RecordPopUpController: UIViewController {
         recordPopView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         recordPopView.allAnswerLabel.text = "Количество ответов: " + String(result.answer)
-        recordPopView.percentRightAnswerLabel.text = "Процент правильных ответов: " + String(format: "%.1f", result.percentRightAnswer) + "%"
+        recordPopView.percentRightAnswerLabel.text = "Процент правильных ответов: " + String(format: "%.0f", result.percentRightAnswer) + "%"
         
         recordPopView.delegate = self
     }
